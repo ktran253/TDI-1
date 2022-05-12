@@ -4,20 +4,23 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-1"/>
+      <foreground color="-1"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="74fb8" class="javax.swing.JLabel" binding="version">
         <constraints border-constraint="North"/>
         <properties>
+          <background color="-16777216"/>
+          <foreground color="-1"/>
           <text value="Version number #"/>
         </properties>
       </component>
-      <component id="95017" class="javax.swing.JLabel" binding="Names">
+      <component id="f768f" class="javax.swing.JTextArea" binding="Names">
         <constraints border-constraint="Center"/>
-        <properties>
-          <text value="test"/>
-        </properties>
+        <properties/>
       </component>
     </children>
   </grid>
