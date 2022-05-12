@@ -7,11 +7,11 @@ public class AboutPage extends JFrame{
     private JLabel version;
     private JLabel Names;
 
-    public void AboutPage(String name, String eMail){
+    public AboutPage(String name, String eMail){
         setTitle("About");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Names.setText(eMail + "\n" + name + "\nCreators: \nZac Moriarty \nBohdan Ivchenko");
+        Names.setText(eMail + "\n" + name + "\nCreators: \nZac Moriarty \nBohdan Ivchenko \n Kevin Tran");
 
         version.setText("test");
         setVisible(true);
