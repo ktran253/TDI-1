@@ -2,6 +2,6 @@
 Team members:  
 Kevin Tran  
 Bohdan Ivchenko  
-Kemeria Mustofa  
+Kemeria Mustfa  
 Tewodros Sisay  
 Zachary Moriarty  
