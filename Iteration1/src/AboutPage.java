@@ -12,7 +12,7 @@ public class AboutPage extends JFrame{
         setTitle("About");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Names.setText(eMail + "\n" + name + "\nCreators: \nZac Moriarty \nBohdan Ivchenko \n Kevin Tran");
+        Names.setText(eMail + "\n" + name + "\nCreators: \nZac Moriarty \nBohdan Ivchenko \n Kevin Tran \n Kemeria Mustfa");
         version.setText(Version.getVersion());
         setVisible(true);
     }
