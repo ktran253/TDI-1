@@ -32,8 +32,6 @@ public class LoginPage extends JFrame{
             }
         });
     }
-    public static void main(String[] theArgs) {
-        LoginPage login = new LoginPage();
-    }
+
 }
 
