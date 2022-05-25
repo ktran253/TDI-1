@@ -29,7 +29,7 @@ public class AddPage extends JFrame {
         addRoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                addTypeGUI page = new addTypeGUI();
             }
         });
     }
