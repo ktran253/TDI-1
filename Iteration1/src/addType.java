@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 /**
  * Add Type
+ * Kevin Tran
  */
 public class addType extends JDialog {
     private JPanel contentPane;
