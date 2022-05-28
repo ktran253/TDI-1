@@ -1,15 +1,16 @@
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ThingList {
-    String name;
+    String name, password;
     String[] rooms, types;
     ArrayList<Thing> things;
-    public ThingList(String name, String[] rooms, String[] types) {
+    public ThingList(String name, String password, String[] rooms, String[] types) {
+        this.password = password;
         things = new ArrayList<>();
         this.name = name;
         this.rooms = rooms;
@@ -42,12 +43,12 @@ public class ThingList {
         out.put("name", name);
         JSONArray roomList = new JSONArray();
         for(int i = 0; i < rooms.length; i ++){
-            roomList.put(rooms[i]);
+            roomList.add(rooms[i]);
         }
         out.put("rooms", roomList);
         JSONArray typeList = new JSONArray();
         for(int i = 0; i < types.length; i ++){
-            typeList.put(types[i]);
+            typeList.add(types[i]);
         }
         out.put("types", typeList);
         JSONArray objectList = new JSONArray();
@@ -58,7 +59,7 @@ public class ThingList {
             thing.put("room", it.getRoom());
             thing.put("type", it.getType());
             thing.put("description", it.getDescription());
-            objectList.put(thing);
+            objectList.add(thing);
         }
         out.put("objects", objectList);
         try(FileWriter file = new FileWriter("TestObject.json")){
