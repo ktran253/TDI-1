@@ -16,6 +16,8 @@ public class ThingList {
         this.rooms = rooms;
         this.types = types;
     }
+    public ArrayList<String> getRooms(){return rooms;}
+    public ArrayList<String> getTypes(){return types;}
     public void add(Thing a){
         things.add(a);
     }
