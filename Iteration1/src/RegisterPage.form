@@ -119,7 +119,7 @@
         </constraints>
         <properties>
           <font name="Segoe Print" size="18"/>
-          <text value="Ok"/>
+          <text value="Cancel"/>
         </properties>
       </component>
     </children>

@@ -7,18 +7,22 @@ import java.util.Collections;
 
 public class ThingList {
     String name, password;
-    String[] rooms, types;
+    ArrayList<String> rooms, types;
     ArrayList<Thing> things;
-    public ThingList(String name, String password, String[] rooms, String[] types) {
+    public ThingList(String name, String password, ArrayList<String> rooms, ArrayList<String> types) {
         this.password = password;
         things = new ArrayList<>();
         this.name = name;
         this.rooms = rooms;
         this.types = types;
     }
+    public ArrayList<String> getRooms(){return rooms;}
+    public ArrayList<String> getTypes(){return types;}
     public void add(Thing a){
         things.add(a);
     }
+    public void addRoom(String room){rooms.add(room);}
+    public void addType(String type){types.add(type);}
     public void sortByName(){
         Collections.sort(things, new SortByName());
     }
@@ -42,13 +46,13 @@ public class ThingList {
         JSONObject out = new JSONObject();
         out.put("name", name);
         JSONArray roomList = new JSONArray();
-        for(int i = 0; i < rooms.length; i ++){
-            roomList.add(rooms[i]);
+        for(int i = 0; i < rooms.size(); i ++){
+            roomList.add(rooms.get(i));
         }
         out.put("rooms", roomList);
         JSONArray typeList = new JSONArray();
-        for(int i = 0; i < types.length; i ++){
-            typeList.add(types[i]);
+        for(int i = 0; i < types.size(); i ++){
+            typeList.add(types.get(i));
         }
         out.put("types", typeList);
         JSONArray objectList = new JSONArray();
