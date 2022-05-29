@@ -31,6 +31,7 @@ public class LoginPage extends JFrame{
                 AboutPage about = new AboutPage(nameText.getText(), emailText.getText());
             }
         });
+
     }
 
 }

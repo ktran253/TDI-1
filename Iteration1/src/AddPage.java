@@ -7,7 +7,7 @@ public class AddPage extends JFrame {
     private JLabel nameLabel;
     private JTextField nameText;
     private JComboBox roomSelect;
-    private JComboBox comboBox1;
+    private JComboBox typeSelect;
     private JLabel roomLabel;
     private JLabel typeLabel;
     private JLabel descriptionLabel;
@@ -29,7 +29,28 @@ public class AddPage extends JFrame {
         addRoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //addTypeGUI page = new addTypeGUI();
+                addRoom roomGUI  = new addRoom();
+                JButton roomButton = roomGUI.getButtonOK();
+                roomButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        roomSelect.addItem(roomGUI.getText());
+                        roomGUI.dispose();
+                    }
+                });
+            }
+        });
+        addTypeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addType typeGUI = new addType();
+                JButton roomButton = typeGUI.getButtonOK();
+                roomButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        typeSelect.addItem(typeGUI.getText());
+                        typeGUI.dispose();
+                    }
+                });
             }
         });
     }
@@ -37,4 +58,5 @@ public class AddPage extends JFrame {
     public static void main(String[] theArgs) {
         AddPage GUI = new AddPage();
     }
+
 }
