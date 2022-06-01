@@ -1,3 +1,32 @@
 {
-  "password" : "password"
+  "password": "password",
+  "rooms": [
+    "living room",
+    "kitchen"
+  ],
+  "types": [
+    "note",
+    "appliance"
+  ],
+  "objects": [
+    {
+      "name": "a",
+      "room": "b",
+      "type": "c",
+      "description": "test item 1"
+    },
+    {
+      "name": "b",
+      "room": "c",
+      "type": "a",
+      "description": "test item 2"
+    },{
+
+      "name": "c",
+      "room": "a",
+      "type": "b",
+      "description": "test item 3"
+    }
+
+  ]
 }
