@@ -60,6 +60,10 @@ public class ItemInfo extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int input = JOptionPane.showConfirmDialog(ItemInfo.this, "Are you sure you want to delete "+thing.getName()+" ?","Confirm Deletiond",JOptionPane.YES_NO_CANCEL_OPTION);
+
+                if( input == 1){
+                    // Code to delete
+                }
             }
         });
     }
