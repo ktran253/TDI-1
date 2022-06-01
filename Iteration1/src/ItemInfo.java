@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author Bohdan Ivchenko
+ */
 public class ItemInfo extends JFrame{
     private JTextField ItemNameTitle;
     private JButton deleteButton;
@@ -51,6 +54,12 @@ public class ItemInfo extends JFrame{
                 cancelButton.setVisible(false);
                 ItemNameTitle.setText(oldName);
                 textArea1.setText(oldDescription);
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int input = JOptionPane.showConfirmDialog(ItemInfo.this, "Are you sure you want to delete "+thing.getName()+" ?","Confirm Deletiond",JOptionPane.YES_NO_CANCEL_OPTION);
             }
         });
     }
