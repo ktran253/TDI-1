@@ -9,7 +9,7 @@ User Story #1: I want to register a new user that contains my name and email add
 4) You should now be brought to the main page if you click on the about button it will contain your information.
 
 User Story #2: I want to create a new item and add it to the main Page.
-1) On the main Page click the add Button
+
 Team members:  
 Kevin Tran  
 Bohdan Ivchenko  
