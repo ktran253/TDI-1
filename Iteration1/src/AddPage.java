@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-    /**
+import java.util.ArrayList;
+
+/**
  * A GUI pops up that allows the user to create an item with a name, description,
  * typing label, and room location.
  * @author Kevin Tran ktran253@uw.edu
@@ -21,15 +23,16 @@ public class AddPage extends JFrame {
     private JButton confirmButton;
     private JButton addRoomButton;
     private JButton addTypeButton;
-    private ThingList list;
+    private ThingList tList;
     private ArrayList<String> typeList;
-    private ArrayList <String> roomList;
+    private ArrayList<String> roomList;
     private Thing item;
+    private MainPageGUI myMainP;
     //Constructor
     /**
      * Constructs the addPage GUI.
      */
-    public AddPage() {
+    public AddPage(ThingList theTList, MainPageGUI theMainP) {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         setContentPane(mainPanel);
@@ -39,11 +42,13 @@ public class AddPage extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        typeList = new ArrayList<>(100);
-        addTypeBox("Note");
-        addTypeBox("Appliance");
-        roomList = new ArrayList<>(100);
-        addRoomBox("Bedroom");
+        this.tList = theTList;
+        this.myMainP = theMainP;
+        typeList = tList.getTypes();
+        typeSelect.setModel(new DefaultComboBoxModel(typeList.toArray()));
+
+        roomList = tList.getRooms();
+        roomSelect.setModel(new DefaultComboBoxModel(roomList.toArray()));
 
         // Button Actions
         addRoomButton.addActionListener(new ActionListener() {
@@ -53,7 +58,9 @@ public class AddPage extends JFrame {
                 JButton roomButton = roomGUI.getButtonOK();
                 roomButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        addRoomBox(roomGUI.getText());
+                        roomList.add(roomGUI.getText());
+                        roomSelect.addItem(roomGUI.getText());
+                        pack();
                         roomGUI.dispose();
                     }
                 });
@@ -68,7 +75,9 @@ public class AddPage extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        addTypeBox(typeGUI.getText());
+                        typeList.add(typeGUI.getText());
+                        typeSelect.addItem(typeGUI.getText());
+                        pack();
                         typeGUI.dispose();
                     }
                 });
@@ -79,28 +88,19 @@ public class AddPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 item = new Thing(nameText.getText(),(String) roomSelect.getSelectedItem(),
                         (String)typeSelect.getSelectedItem(),textArea.getText());
+                tList.add(item);
+                myMainP.build();
+                dispose();
+            }
+        });
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nameText.setText("");
+                textArea.setText("");
             }
         });
     }
     //Methods
 
-    private void addRoomBox(String room) {
-        if (room == "" || room == null)  {
-            throw new IllegalArgumentException("please insert a room");
-        }
-        roomList.add(room);
-        roomSelect.addItem(room);
-    }
-    private void addTypeBox(String type) {
-        if (type == "" || type == null)  {
-            throw new IllegalArgumentException("please insert a type");
-        }
-        typeList.add(type);
-        typeSelect.addItem(type);
-    }
-
-
-    public static void main(String[] theArgs) {
-        AddPage GUI = new AddPage();
-    }
 }

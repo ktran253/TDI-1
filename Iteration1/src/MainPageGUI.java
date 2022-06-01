@@ -64,7 +64,7 @@ public class MainPageGUI extends JFrame{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddPage page = new AddPage();
+                AddPage page = new AddPage(things, MainPageGUI.this);
             }
         });
         sortBy.addActionListener(new ActionListener() {
