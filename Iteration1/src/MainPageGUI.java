@@ -97,7 +97,14 @@ public class MainPageGUI extends JFrame{
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String thingName = searchField.getText();
+                Thing thing = things.getThing(thingName);
+                if(thing != null) {
+                    ItemInfo item = new ItemInfo(thing, things, MainPageGUI.this);
+                }
+                else{
+                    JOptionPane.showMessageDialog(MainPageGUI.this, "Could not find item.", "Item not found", JOptionPane.OK_OPTION);
+                }
             }
         });
         getSelectedItemButton.addActionListener(new ActionListener() {
