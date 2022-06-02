@@ -5,22 +5,24 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Zac Moriarty
+ */
 public class ThingList {
-    String name, password;
+    String name, password, email;
     ArrayList<String> rooms, types;
     ArrayList<Thing> things;
-    public ThingList(String name, String password, ArrayList<String> rooms, ArrayList<String> types) {
+    public ThingList(String name, String password, String email, ArrayList<String> rooms, ArrayList<String> types) {
         this.password = password;
         things = new ArrayList<>();
+        this.email = email;
         this.name = name;
         this.rooms = rooms;
         this.types = types;
     }
     public ArrayList<String> getRooms(){return rooms;}
     public ArrayList<String> getTypes(){return types;}
-    public void add(Thing a){
-        things.add(a);
-    }
+    public void add(Thing a){things.add(a);}
     public void addRoom(String room){rooms.add(room);}
     public void addType(String type){types.add(type);}
     public void sortByName(){
@@ -42,9 +44,18 @@ public class ThingList {
         }
         return list;
     }
+    public Thing getThing(String Name){
+        for (Thing t:
+             things) {
+            if(t.getName().equals(Name)){
+                return t;
+            }
+        }
+        return null;
+    }
     public void printToJson(){
         JSONObject out = new JSONObject();
-        out.put("name", name);
+        out.put("password", password);
         JSONArray roomList = new JSONArray();
         for(int i = 0; i < rooms.size(); i ++){
             roomList.add(rooms.get(i));
@@ -66,7 +77,8 @@ public class ThingList {
             objectList.add(thing);
         }
         out.put("objects", objectList);
-        try(FileWriter file = new FileWriter("TestObject.json")){
+        out.put("email", email);
+        try(FileWriter file = new FileWriter(name + ".json")){
             file.write(out.toString());
             file.flush();
         }
@@ -74,4 +86,5 @@ public class ThingList {
             System.out.println(e);
         }
     }
+    public void removeThing(Thing t){things.remove(t);}
 }
