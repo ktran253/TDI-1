@@ -7,14 +7,19 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Locale;
 
-
+/**
+ * the main GUI of the project. creates a table of items that the user has saved,
+ * and gives access to the other functions through buttons.
+ * @author zac Moriarty
+ */
 public class MainPageGUI extends JFrame{
     private ThingList things;
-    private String name, password;
+    private String name, password, email;
     private DefaultTableModel tableModel;
     private JButton addButton;
     private JButton searchButton;
@@ -22,6 +27,7 @@ public class MainPageGUI extends JFrame{
     private JComboBox sortBy;
     private JTable table1;
     private JPanel mainPanel;
+    private JButton getSelectedItemButton;
     private JMenuBar bar;
 
     /**
@@ -29,12 +35,12 @@ public class MainPageGUI extends JFrame{
      *
      * @param name The name of the user profile accessing the program.
      * @param password the users' password. used to make it easier to store later
-     * @param file  a file reader with the users json file holding all of their items
+     * @param email  an email for the user
      */
-    public MainPageGUI(String name, String password, FileReader file){
+    public MainPageGUI(String name, String password, String email){
         this.name = name;
         this.password = password;
-        things = new ThingList(name, password, new ArrayList<String>(), new ArrayList<String>());
+        things = new ThingList(name, password, email, new ArrayList<String>(), new ArrayList<String>());
         setTitle("Household handbook");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
@@ -45,11 +51,13 @@ public class MainPageGUI extends JFrame{
         JMenu fileMenu = new JMenu("File");
         bar.add(fileMenu);
         JMenuItem about = new JMenuItem("about");
-        JMenuItem export = new JMenuItem("export");
-        JMenuItem importer = new JMenuItem("import");
         fileMenu.add(about);
-        fileMenu.add(export);
-        fileMenu.add(importer);
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AboutPage page = new AboutPage(name, email);
+            }
+        });
         tableModel = new DefaultTableModel(){
             public boolean isCellEditable(int row, int column){
                 return false;
@@ -59,6 +67,7 @@ public class MainPageGUI extends JFrame{
         tableModel.addColumn("Room");
         tableModel.addColumn("Type");
         table1.setModel(tableModel);
+        table1.getTableHeader().setReorderingAllowed(false);
         parseJson(name + ".json");
         build();
         addButton.addActionListener(new ActionListener() {
@@ -91,6 +100,16 @@ public class MainPageGUI extends JFrame{
 
             }
         });
+        getSelectedItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String thingName = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+               Thing thing = things.getThing(thingName);
+               if(thing != null) {
+                   ItemInfo item = new ItemInfo(thing, things, MainPageGUI.this);
+               }
+            }
+        });
     }
 
     public void build(){
@@ -104,6 +123,7 @@ public class MainPageGUI extends JFrame{
         try(FileReader file = new FileReader(fileName)){
             JSONParser parser = new JSONParser();
             JSONObject main = (JSONObject) parser.parse(file);
+            email = main.get("email").toString();
             JSONArray roomsList = (JSONArray) main.get("rooms");
             for(int i = 0; i < roomsList.size(); i++){
                 things.addRoom(roomsList.get(i).toString());

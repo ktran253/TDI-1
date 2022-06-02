@@ -40,9 +40,10 @@ public class LoginPage extends JFrame{
                     JSONParser parser = new JSONParser();
                     JSONObject main = (JSONObject) parser.parse(file);
                     String password = main.get("password").toString();
+                    String email = main.get("email").toString();
                     if(password.equals(passwordText.getText())){
                         dispose();
-                        MainPageGUI page = new MainPageGUI(nameText.getText().toLowerCase(Locale.ROOT), passwordText.getText(), file);
+                        MainPageGUI page = new MainPageGUI(nameText.getText().toLowerCase(Locale.ROOT), passwordText.getText(), email);
                     }
                     else{
                         JOptionPane.showMessageDialog(LoginPage.this,

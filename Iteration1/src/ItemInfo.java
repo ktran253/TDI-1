@@ -14,13 +14,16 @@ public class ItemInfo extends JFrame{
     private JTextArea textArea1;
     private JButton saveButton;
     private JButton cancelButton;
+    private JPanel pane;
     private String oldName, oldDescription;
 
-    public ItemInfo(Thing thing) {
+    public ItemInfo(Thing thing, ThingList list, MainPageGUI main) {
+        setContentPane(pane);
         ItemNameTitle.setText(thing.getName());
         ItemTypeLabel.setText(thing.getType());
         ItemLocationLabel.setText(thing.getRoom());
-        setSize(400,400);
+        textArea1.setText(thing.getDescription());
+        setSize(400,300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         textArea1.setEditable(false);
@@ -43,8 +46,12 @@ public class ItemInfo extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 thing.setName(ItemNameTitle.getText());
                 thing.setDescription(textArea1.getText());
+                main.build();
+                list.printToJson();
                 saveButton.setVisible(false);
                 cancelButton.setVisible(false);
+                ItemNameTitle.setEditable(false);
+                textArea1.setEditable(false);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -54,15 +61,20 @@ public class ItemInfo extends JFrame{
                 cancelButton.setVisible(false);
                 ItemNameTitle.setText(oldName);
                 textArea1.setText(oldDescription);
+                ItemNameTitle.setEditable(false);
+                textArea1.setEditable(false);
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int input = JOptionPane.showConfirmDialog(ItemInfo.this, "Are you sure you want to delete "+thing.getName()+" ?","Confirm Deletiond",JOptionPane.YES_NO_CANCEL_OPTION);
+                int input = JOptionPane.showConfirmDialog(ItemInfo.this, "Are you sure you want to delete "+thing.getName()+" ?","Confirm Deletiond",JOptionPane.YES_NO_OPTION);
 
-                if( input == 1){
-                    // Code to delete
+                if( input == 0){
+                    list.removeThing(thing);
+                    list.printToJson();
+                    main.build();
+                    dispose();
                 }
             }
         });
