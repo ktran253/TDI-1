@@ -9,6 +9,7 @@ public class AboutPage extends JFrame{
 
     public AboutPage(String name, String eMail){
         setContentPane(panel1);
+        Names.setEditable(false);
         setTitle("About");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -1,5 +1,8 @@
 import java.util.Comparator;
 
+/**
+ * @author zac moriarty
+ */
 public class Thing {
     private String name, room, type;
     private String description;
@@ -64,3 +67,4 @@ public class Thing {
             return one.getType().compareTo(two.getType());
         }
     }
+

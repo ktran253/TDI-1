@@ -70,7 +70,7 @@ public class RegisterPage extends JDialog{
                 FileWriter out = new FileWriter(name + ".json");
                 JSONObject file = new JSONObject();
                 file.put("password", password);
-                file.put("Email", email);
+                file.put("email", email);
                 JSONArray rooms = new JSONArray();
                 JSONArray types = new JSONArray();
                 JSONArray objects = new JSONArray();
@@ -83,16 +83,11 @@ public class RegisterPage extends JDialog{
                 file.put("objects", objects);
                 out.write(file.toString());
                 out.flush();
-                FileReader in = new FileReader(name + ".json");
-                MainPageGUI page = new MainPageGUI(name, password, in);
+                MainPageGUI page = new MainPageGUI(name, password, email);
                 dispose();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         }
-        public static void main (String[]args){
-            RegisterPage myForm = new RegisterPage(null);
-        }
-
     }

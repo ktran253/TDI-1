@@ -89,6 +89,7 @@ public class AddPage extends JFrame {
                 item = new Thing(nameText.getText(),(String) roomSelect.getSelectedItem(),
                         (String)typeSelect.getSelectedItem(),textArea.getText());
                 tList.add(item);
+                tList.printToJson();
                 myMainP.build();
                 dispose();
             }
